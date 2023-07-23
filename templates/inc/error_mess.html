@@ -1,0 +1,29 @@
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+
+{% for message in messages %}
+
+{% set message_text = message[1] %}
+{% set message_category = message[0] %}
+
+<div class="alert alert-{{message_category}} alert-dismissible fade show" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+    
+    <div class="flash-message  {{ message_category }}">{{ message_text }}</div>
+  </div>
+
+  <script>
+    // Automatically close the alert after 5 seconds
+    setTimeout(function() {
+      $('.alert').alert('close');
+    }, 3000);
+  </script>
+
+{% endfor %}
+
+{% endif %}
+{% endwith %}
+
