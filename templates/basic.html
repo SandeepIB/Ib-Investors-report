@@ -74,9 +74,10 @@
                     <!-- end message -->
                     <h5 class="">Ask me anything                  </h5>
                     <div class="form-group-2 mb-4">
-                        <textarea name="message" class="form-control" rows="10" placeholder="Type Anything...">{{input}}</textarea>
+                        <textarea id="msgarea" name="message" class="form-control" rows="10" placeholder="Type Anything...">{{input}}</textarea>
                     </div>
                     <button class="blue buttn" id="submit_query" name="submit" type="submit">Send Query</button>
+                    <button class="blue buttn" type="button" onClick="eraseText();" >Clear Data <i class="ti-reload"></i></button>
                     <div id="loading-icon" style="display: none;">
                         <!-- Replace with your loading icon HTML or image -->
                         Loading...
@@ -88,7 +89,7 @@
                    <!-- end message -->
                    <h5 class="">Answer</h5>
                    <div class="form-group-2 mb-4">
-                       <textarea name="message_output" class="form-control" rows="10" placeholder="Output">{% if result %}{{result}}{% endif %}</textarea>
+                       <textarea disabled id="msgarea2" name="message_output" class="form-control" rows="10" placeholder="Output">{% if result %}{{result}}{% endif %}</textarea>
                    </div>
                    
            </div>
@@ -101,7 +102,12 @@
     <!-- 
     Essential Scripts
     =====================================-->
-
+<script>
+function eraseText() {
+    document.getElementById("msgarea").value = "";
+    document.getElementById("msgarea2").value = "";
+}
+</script>
     
     
 

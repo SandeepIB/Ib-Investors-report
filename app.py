@@ -48,12 +48,13 @@ def construct_index(directory_path):
 
     index = GPTSimpleVectorIndex(documents, llm_predictor=llm_predictor, prompt_helper=prompt_helper)
 
-    index.save_to_disk(os.path.join(directory_path, 'index.json'))
+    index.save_to_disk( 'index.json')
 
     return index
 
 @app.route('/', methods=['POST', 'GET'])
 def investor():
+  if request.method == 'POST':
     message = request.form.get('message')
     if not message:
         flash('Please ask me something', 'warning')
@@ -61,13 +62,14 @@ def investor():
 
     response = chatbot(message)
     if response:
-        return render_template('basic.html', input=message, result=response)
+       flash('Output is ready', 'success')
+       return render_template('basic.html', input=message, result=response)
     else:
         flash('API request failed.', 'danger')
         return render_template('basic.html')
-
+  return render_template('basic.html')
 def chatbot(input_text):
-    index = GPTSimpleVectorIndex.load_from_disk(os.path.join(DIRECTORY_PATH, 'index.json'))
+    index = GPTSimpleVectorIndex.load_from_disk('index.json')
     response = index.query(input_text, response_mode="compact")
     return response.response
 
@@ -87,4 +89,4 @@ def api():
 if __name__ == '__main__':
     # Construct and save the index when the app starts
     index = construct_index(DIRECTORY_PATH)
-    app.run()
+    app.run(debug=True)
