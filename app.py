@@ -42,7 +42,7 @@ def construct_index(directory_path):
 
     prompt_helper = PromptHelper(max_input_size, num_outputs, max_chunk_overlap, chunk_size_limit=chunk_size_limit)
 
-    llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0.7, model_name="gpt-3.5-turbo", max_tokens=num_outputs, messages=messages))
+    llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0.9, model_name="gpt-3.5-turbo", max_tokens=num_outputs, messages=messages))
 
     documents = SimpleDirectoryReader(directory_path).load_data()
 
